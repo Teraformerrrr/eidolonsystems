@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EIDOLON SYSTEMS — Identity Architecture</title>
+  <!-- if you're reading this, you already know. /archive/null_log_047 -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:     #0a0a0a;
+      --fg:     #c8c8c8;
+      --accent: #4a9e6b;
+      --dim:    #2a2a2a;
+      --red:    #8b2020;
+      --link:   #6ab0a0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Courier Prime', monospace;
+      font-size: 14px;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* Scanlines */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .wrapper { max-width: 860px; margin: 0 auto; padding: 60px 30px; }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 1px solid var(--dim);
+      padding-bottom: 28px;
+      margin-bottom: 50px;
+    }
+    .logo {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .tagline {
+      font-size: 11px;
+      color: #404040;
+      letter-spacing: 2px;
+    }
+    nav { margin-top: 18px; display: flex; gap: 28px; }
+    nav a {
+      color: #444;
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--fg); }
+
+    /* ── HERO ── */
+    .hero { margin-bottom: 65px; }
+    .hero h1 {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 30px;
+      font-weight: normal;
+      color: var(--fg);
+      line-height: 1.35;
+      margin-bottom: 18px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p { color: #555; max-width: 540px; font-size: 13px; }
+
+    /* Glitch on title */
+    .glitch { position: relative; }
+    .glitch::before, .glitch::after {
+      content: attr(data-text);
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+    .glitch::before {
+      color: rgba(255,0,0,0.06);
+      animation: g1 5s infinite linear;
+    }
+    .glitch::after {
+      color: rgba(0,255,255,0.05);
+      animation: g2 5s infinite linear;
+    }
+    @keyframes g1 {
+      0%,90%,100%{clip-path:none;transform:none}
+      91%{clip-path:polygon(0 25%,100% 25%,100% 35%,0 35%);transform:translateX(-2px)}
+      93%{clip-path:polygon(0 65%,100% 65%,100% 72%,0 72%);transform:translateX(2px)}
+      95%{clip-path:none;transform:none}
+    }
+    @keyframes g2 {
+      0%,85%,100%{clip-path:none;transform:none}
+      86%{clip-path:polygon(0 45%,100% 45%,100% 55%,0 55%);transform:translateX(2px)}
+      88%{clip-path:none;transform:none}
+    }
+
+    /* ── SECTION ── */
+    section { margin-bottom: 55px; }
+    .section-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--dim);
+    }
+
+    /* ── SERVICES GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--dim);
+      border: 1px solid var(--dim);
+    }
+    .grid-item { background: var(--bg); padding: 22px; }
+    .grid-item h3 {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--fg);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .grid-item p { font-size: 12px; color: #484848; line-height: 1.7; }
+
+    /* ── BLOG POSTS ── */
+    .post {
+      border-left: 2px solid var(--dim);
+      padding: 0 0 26px 18px;
+      margin-bottom: 26px;
+    }
+    .post:last-child { border-left-color: var(--red); }
+    .post-date {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #383838;
+      margin-bottom: 6px;
+      font-family: 'Share Tech Mono', monospace;
+    }
+    .post h3 {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      color: var(--fg);
+      font-weight: normal;
+      margin-bottom: 8px;
+    }
+    .post p { font-size: 12px; color: #484848; max-width: 540px; }
+    .post.final p::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+      color: var(--fg);
+      margin-left: 2px;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── TEAM ── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .team-member { text-align: center; }
+    .team-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      background: #0e0e0e;
+      border: 1px solid var(--dim);
+      margin-bottom: 8px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .team-photo .avatar-letter {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 26px;
+      color: #1e1e1e;
+      position: relative;
+      z-index: 1;
+    }
+    /* THE SECRET PIXEL — bottom-right of team photo area
+       Color: rgb(71,79,84)
+       ASCII: G(71) O(79) S(84) → GOS → Fragment 1
+       Solvers who color-pick this pixel and convert to ASCII get "GOS" */
+    .hidden-pixel {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 1px; height: 1px;
+      background: rgb(71, 79, 84);
+      z-index: 10;
+    }
+    .team-name {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: #383838;
+      text-transform: uppercase;
+    }
+    .team-role { font-size: 10px; color: #282828; margin-top: 2px; }
+
+    /* ── CONTACT ── */
+    .contact-block { border: 1px solid var(--dim); padding: 26px; }
+    .contact-block p { font-size: 12px; color: #484848; margin-bottom: 5px; }
+    .contact-block a { color: var(--link); text-decoration: none; }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 75px;
+      padding-top: 26px;
+      border-top: 1px solid var(--dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: 10px; color: #282828; letter-spacing: 2px; }
+    .status-dot {
+      width: 5px; height: 5px;
+      background: var(--red);
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 7px;
+    }
+
+    /*
+      THE INVISIBLE DOT LINK — points to the steganographic image
+      Color matches background exactly — only visible on hover via status bar
+      OR when someone does "Select All" on the page
+    */
+    .null-link {
+      color: var(--bg);
+      font-size: 1px;
+      line-height: 0;
+      text-decoration: none;
+      user-select: text;
+    }
+    .null-link:focus { outline: none; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- ════ HEADER ════ -->
+  <header>
+    <div class="logo">EIDOLON SYSTEMS</div>
+    <div class="tagline">Identity Architecture · Est. 2013 · London, UK</div>
+    <nav>
+      <a href="#">Services</a>
+      <a href="#">Research</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Updates</a>
+    </nav>
+  </header>
+
+  <!-- ════ HERO ════ -->
+  <section class="hero">
+    <h1 class="glitch" data-text="We Build the Infrastructure of Digital Invisibility">
+      We Build the Infrastructure<br>of Digital <span>Invisibility</span>
+    </h1>
+    <p>
+      EIDOLON SYSTEMS designs enterprise-grade identity management frameworks
+      for organisations that require zero-trace operational continuity.
+      Our clients don't advertise their relationship with us. Neither do we.
+    </p>
+  </section>
+
+  <!-- ════ SERVICES ════ -->
+  <section>
+    <div class="section-label">Core Services</div>
+    <div class="grid">
+      <div class="grid-item">
+        <h3>Identity Erasure</h3>
+        <p>Complete removal of digital footprint across commercial and governmental data architectures. Certified under ISO/IEC 27001.</p>
+      </div>
+      <div class="grid-item">
+        <h3>Signal Rerouting</h3>
+        <p>Proprietary network topology that redirects identity signals to controlled destinations. Used by 14 Fortune 500 clients.</p>
+      </div>
+      <div class="grid-item">
+        <h3>Archive Nullification</h3>
+        <p>Retroactive data removal from archival systems, including cached web, satellite records, and legacy institutional databases.</p>
+      </div>
+      <div class="grid-item">
+        <h3>Project NULL</h3>
+        <p>Our flagship product. Classified. Available to verified partners only. Inquiries by encrypted referral only.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ BLOG ════ -->
+  <section>
+    <div class="section-label">Company Updates</div>
+
+    <div class="post">
+      <div class="post-date">14 MARCH 2018</div>
+      <h3>EIDOLON expands Project NULL to Phase 3</h3>
+      <p>Following successful Phase 2 trials across our London and Singapore nodes, the board has approved full Phase 3 deployment. Details remain under NDA pending client review.</p>
+    </div>
+
+    <div class="post">
+      <div class="post-date">02 SEPTEMBER 2018</div>
+      <h3>Statement on recent media inquiries</h3>
+      <p>EIDOLON Systems does not comment on the nature of its clients or operational parameters. Persistent inquiry will be forwarded to our legal team.</p>
+    </div>
+
+    <!-- LAST POST — CUTS OFF MID-SENTENCE with blinking cursor -->
+    <!-- DATE IS THE KEY: 11 January 2019 = steghide password 11-01-2019 -->
+    <div class="post final">
+      <div class="post-date">11 JANUARY 2019</div>
+      <h3>Internal restructuring — Q1 2019</h3>
+      <p>Following the departure of three senior engineers, EIDOLON will undergo internal restructuring in Q1. Services remain fully operational. The board thanks the departing team for</p>
+    </div>
+  </section>
+
+  <!-- ════ TEAM ════ -->
+  <section>
+    <div class="section-label">Leadership</div>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="team-photo">
+          <span class="avatar-letter">M</span>
+          <div class="hidden-pixel"></div><!-- rgb(71,79,84) = GOS -->
+        </div>
+        <div class="team-name">M. ASHFORD</div>
+        <div class="team-role">Chief Executive</div>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><span class="avatar-letter">R</span></div>
+        <div class="team-name">R. VALE</div>
+        <div class="team-role">Systems Architecture</div>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><span class="avatar-letter">D</span></div>
+        <div class="team-name">D. ORRIN</div>
+        <div class="team-role">Project NULL Lead</div>
+      </div>
+      <div class="team-member">
+        <div class="team-photo"><span class="avatar-letter">?</span></div>
+        <div class="team-name">REDACTED</div>
+        <div class="team-role">The Archivist</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ CONTACT ════ -->
+  <section>
+    <div class="section-label">Contact</div>
+    <div class="contact-block">
+      <p>General: <a href="mailto:contact@eidolonsystems.net">contact@eidolonsystems.net</a></p>
+      <p>Secure inquiries: PGP key available on request</p>
+      <p>Registered: 71 Aldgate High Street, London, EC3N 1AL</p>
+      <p style="margin-top:12px;color:#282828;font-size:11px;">
+        EIDOLON SYSTEMS LTD — Company No. 08471203 — All communications monitored.
+      </p>
+    </div>
+  </section>
+
+  <!-- ════ FOOTER ════ -->
+  <footer>
+    <p>© 2019 EIDOLON SYSTEMS LTD — ALL RIGHTS RESERVED</p>
+    <p><span class="status-dot"></span>SITE ARCHIVED — NO ACTIVE MAINTENANCE</p>
+  </footer>
+
+  <!--
+    THE INVISIBLE LINK — points to the steganographic image
+    Only visible if you:
+    1. Do Ctrl+A (select all) on the page → you'll see a tiny dot in the footer
+    2. Hover over the bottom-right of the footer and check your browser's status bar
+    3. View page source and find this element
+
+    The image (team_archive.jpg) contains hidden data extractable with:
+      steghide extract -sf team_archive.jpg -p "11-01-2019"
+  -->
+  <a href="/assets/team_archive.jpg" class="null-link" aria-hidden="true">·</a>
+
+</div>
+
+<!-- ════ HIDDEN SCRIPT — LAYER 2 CLUES ════ -->
+<script>
+  // E1D0L0N
+  // The password is the day EIDOLON went dark.
+  // Look at the last post. Read the date. Use the format: DD-MM-YYYY
+  var _archived = true;
+  var _timestamp = 1547164800; // Jan 11 2019 00:00:00 UTC
+</script>
+
+</body>
+</html>
