@@ -4,10 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>EIDOLON SYSTEMS — Identity Architecture</title>
-  <!-- if you're reading this, you already know. /eidolonsystems/archive/null_log_047 -->
+  <!-- if you're reading this, you already know. /archive/null_log_047 -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
-    /* ── VARIABLES ── */
     :root {
       --bg:     #0a0a0a;
       --fg:     #c8c8c8;
@@ -17,7 +16,6 @@
       --link:   #6ab0a0;
     }
 
-    /* ── RESET ── */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -29,7 +27,6 @@
       min-height: 100vh;
     }
 
-    /* ── SCANLINES ── */
     body::after {
       content: '';
       position: fixed;
@@ -42,10 +39,8 @@
       z-index: 9999;
     }
 
-    /* ── LAYOUT ── */
     .wrapper { max-width: 860px; margin: 0 auto; padding: 60px 30px; }
 
-    /* ── HEADER ── */
     header {
       border-bottom: 1px solid var(--dim);
       padding-bottom: 28px;
@@ -75,7 +70,6 @@
     }
     nav a:hover { color: var(--fg); }
 
-    /* ── HERO ── */
     .hero { margin-bottom: 65px; }
     .hero h1 {
       font-family: 'Share Tech Mono', monospace;
@@ -88,7 +82,6 @@
     .hero h1 span { color: var(--accent); }
     .hero p { color: #555; max-width: 540px; font-size: 13px; }
 
-    /* ── GLITCH ── */
     .glitch { position: relative; }
     .glitch::before, .glitch::after {
       content: attr(data-text);
@@ -115,7 +108,6 @@
       88%{clip-path:none;transform:none}
     }
 
-    /* ── SECTIONS ── */
     section { margin-bottom: 55px; }
     .section-label {
       font-family: 'Share Tech Mono', monospace;
@@ -128,7 +120,6 @@
       border-bottom: 1px solid var(--dim);
     }
 
-    /* ── SERVICES GRID ── */
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -147,7 +138,6 @@
     }
     .grid-item p { font-size: 12px; color: #484848; line-height: 1.7; }
 
-    /* ── BLOG POSTS ── */
     .post {
       border-left: 2px solid var(--dim);
       padding: 0 0 26px 18px;
@@ -170,7 +160,6 @@
     }
     .post p { font-size: 12px; color: #484848; max-width: 540px; }
 
-    /* Blinking cursor on last post */
     .post.final p::after {
       content: '|';
       animation: blink 1s step-end infinite;
@@ -179,7 +168,6 @@
     }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-    /* ── TEAM ── */
     .team-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -205,12 +193,6 @@
       position: relative;
       z-index: 1;
     }
-    /*
-      HIDDEN PIXEL — bottom-right of first team photo
-      Color: rgb(71,79,84)
-      ASCII: G=71, O=79, S=84
-      This spells: GOS — a red herring that wastes time
-    */
     .hidden-pixel {
       position: absolute;
       bottom: 0; right: 0;
@@ -227,7 +209,6 @@
     }
     .team-role { font-size: 10px; color: #282828; margin-top: 2px; }
 
-    /* ── STATS ROW ── */
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -246,7 +227,6 @@
     }
     .stat-label { font-size: 10px; color: #383838; letter-spacing: 2px; text-transform: uppercase; }
 
-    /* ── CONTACT ── */
     .contact-block { border: 1px solid var(--dim); padding: 26px; }
     .contact-block p { font-size: 12px; color: #484848; margin-bottom: 6px; }
     .contact-block a { color: var(--link); text-decoration: none; }
@@ -258,7 +238,6 @@
       letter-spacing: 1px;
     }
 
-    /* ── FOOTER ── */
     footer {
       margin-top: 75px;
       padding-top: 26px;
@@ -278,15 +257,6 @@
       margin-right: 7px;
     }
 
-    /* ── INVISIBLE DOT LINK ── */
-    /*
-      This link is invisible — same color as background.
-      Visible only when:
-      1. You press Ctrl+A (select all)
-      2. You hover the bottom-right of footer and check status bar
-      3. You view page source
-      Points to the steganographic image.
-    */
     .null-link {
       color: var(--bg);
       font-size: 1px;
@@ -295,7 +265,6 @@
       user-select: text;
     }
 
-    /* ── NULL OVERRIDE — hidden CSS fragment ── */
     /*
       .null-override { display: block; }
       ref: D.ORRIN — fragment-b: SIGNAL
@@ -308,7 +277,6 @@
 <body>
 <div class="wrapper">
 
-  <!-- ══════════ HEADER ══════════ -->
   <header>
     <div class="logo">EIDOLON SYSTEMS</div>
     <div class="tagline">Identity Architecture · Est. 2013 · London, UK</div>
@@ -321,7 +289,6 @@
     </nav>
   </header>
 
-  <!-- ══════════ HERO ══════════ -->
   <section class="hero">
     <h1 class="glitch" data-text="We Build the Infrastructure of Digital Invisibility">
       We Build the Infrastructure<br>of Digital <span>Invisibility</span>
@@ -333,12 +300,6 @@
     </p>
   </section>
 
-  <!-- ══════════ STATS — red herrings ══════════ -->
-  <!--
-    These numbers look meaningful but are not puzzle answers.
-    They exist purely to waste solvers' time.
-    08, 47, 19 will send people down wrong paths for hours.
-  -->
   <div class="stats">
     <div class="stat-item">
       <span class="stat-number">08</span>
@@ -354,7 +315,6 @@
     </div>
   </div>
 
-  <!-- ══════════ SERVICES ══════════ -->
   <section>
     <div class="section-label">Core Services</div>
     <div class="grid">
@@ -377,7 +337,6 @@
     </div>
   </section>
 
-  <!-- ══════════ UPDATES ══════════ -->
   <section>
     <div class="section-label">Company Updates</div>
 
@@ -393,13 +352,6 @@
       <p>EIDOLON Systems does not comment on the nature of its clients or operational parameters. Persistent inquiry will be forwarded to our legal team. We appreciate the interest.</p>
     </div>
 
-    <!--
-      FINAL POST — cuts off mid-sentence.
-      DATE IS THE KEY: 11 JANUARY 2019
-      Steghide password format: DD-MM-YYYY = 11-01-2019
-      Players find this date, combine with hex clue from 404 page,
-      and get the password to extract the hidden image message.
-    -->
     <div class="post final">
       <div class="post-date">11 JANUARY 2019</div>
       <h3>Internal restructuring — Q1 2019</h3>
@@ -408,7 +360,6 @@
 
   </section>
 
-  <!-- ══════════ TEAM ══════════ -->
   <section>
     <div class="section-label">Leadership</div>
     <div class="team-grid">
@@ -416,7 +367,6 @@
       <div class="team-member">
         <div class="team-photo">
           <span class="avatar-letter">M</span>
-          <!-- SECRET PIXEL rgb(71,79,84) = GOS — intentional red herring -->
           <div class="hidden-pixel"></div>
         </div>
         <div class="team-name">M. ASHFORD</div>
@@ -444,15 +394,6 @@
     </div>
   </section>
 
-  <!-- ══════════ CONTACT ══════════ -->
-  <!--
-    THE COORDINATES PUZZLE IS HERE.
-    51°30'51.9"N 0°04'26.7"W → Google Maps → Street View
-    Players find: "Central ZONE" sign + "St Botolph St" street name
-    ZONE = red herring word (wastes time)
-    BOTOLPH = Fragment A of the Vigenère key
-    7 (from 7am on sign) = the time gate hour (7:00 UTC)
-  -->
   <section>
     <div class="section-label">Contact</div>
     <div class="contact-block">
@@ -460,12 +401,6 @@
       <p>Secure channel: PGP key available on verified request only</p>
       <p>Legal: <a href="mailto:legal@eidolonsystems.net">legal@eidolonsystems.net</a></p>
       <p>Phone: +44 207 946 0047</p>
-      <!--
-        NOTE FOR ARG MASTER:
-        +44 207 946 0047 — the 0047 is a red herring pointing back to /archive/null_log_047
-        It will confuse players who haven't found the source comment yet
-        and confirm the path for those who have.
-      -->
       <p class="coords">Operational coordinates: 51°30'51.9"N 0°04'26.7"W</p>
       <p style="margin-top:12px; color:#282828; font-size:11px;">
         EIDOLON SYSTEMS LTD — Company No. 08471203 — All communications monitored.
@@ -473,24 +408,17 @@
       <p>Archive channel: <a href="https://youtu.be/ksweGWKT-lI" style="color:#282828;">yt/EIDOLONSYSTEMS</a></p>
     </div>
   </section>
-  <!-- ══════════ FOOTER ══════════ -->
+
   <footer>
     <p>© 2019 EIDOLON SYSTEMS LTD — ALL RIGHTS RESERVED</p>
     <p><span class="status-dot"></span>SITE ARCHIVED — NO ACTIVE MAINTENANCE</p>
   </footer>
 
-  <!--
-    INVISIBLE DOT LINK — the steganographic image
-    Only visible via Ctrl+A, source view, or status bar hover
-    Solvers extract with: steghide extract -sf team_archive.jpg -p "11-01-2019"
-    (we will add this image to GitHub assets folder in a later step)
-  -->
   <a href="https://teraformerrrr.github.io/eidolonsystems/assets/team_archive.jpg" class="null-link" aria-hidden="true">·</a>
   <a href="https://pastebin.com/iyGYMkcQ" class="null-link" aria-hidden="true">·</a>
 
-</div><!-- end .wrapper -->
+</div>
 
-<!-- ══════════ HIDDEN SCRIPT — LAYER 6 CIPHER ══════════ -->
 <script>
   /*
     E1D0L0N
@@ -498,21 +426,12 @@
     Look at the last post. Read the date. Format: DD-MM-YYYY
   */
   var _archived  = true;
-  var _timestamp = 1547164800; // Jan 11 2019 00:00:00 UTC
+  var _timestamp = 1547164800;
 
   /*
     FRAGMENT ASSEMBLY TARGET:
-    Encrypted string below requires a Vigenère key to decode.
-    The key is assembled from fragments found across multiple locations.
-
-    fragment-a: found in CSS comments above         → BOTOLPH
-    fragment-b: found in CSS comments above         → SIGNAL
-    fragment-c: found in Discord #rules acrostic    → NULL
-    fragment-d: found in YouTube video description  → 047
-
-    Assemble: BOTOLPHSIGNALNULL047
-    Use as Vigenère key to decrypt the string below.
-    Decrypted answer goes to /claim in The Void Discord.
+    Encrypted string below requires a key to decode.
+    The key is not here.
 
     Encrypted: JVAAZ FKOTZ OAIES
   */
@@ -520,8 +439,7 @@
 
   /*
     One more thing.
-    The /claim command only accepts transmissions
-    when the first operational hour begins.
+    The claim only opens when the first operational hour begins.
     EIDOLON's systems run on London time.
     The sign knows when.
   */
