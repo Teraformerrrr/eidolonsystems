@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>EIDOLON SYSTEMS — Identity Architecture</title>
-  <!-- if you're reading this, you already know. /archive/null_log_047 -->
+  <!-- if you're reading this, you already know. /eidolonsystems/archive/null_log_047 -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -200,10 +200,7 @@
       position: relative;
       z-index: 1;
     }
-    /* THE SECRET PIXEL — bottom-right of team photo area
-       Color: rgb(71,79,84)
-       ASCII: G(71) O(79) S(84) → GOS → Fragment 1
-       Solvers who color-pick this pixel and convert to ASCII get "GOS" */
+    /* THE SECRET PIXEL — rgb(71,79,84) = ASCII G(71) O(79) S(84) = GOS */
     .hidden-pixel {
       position: absolute;
       bottom: 0; right: 0;
@@ -243,11 +240,7 @@
       margin-right: 7px;
     }
 
-    /*
-      THE INVISIBLE DOT LINK — points to the steganographic image
-      Color matches background exactly — only visible on hover via status bar
-      OR when someone does "Select All" on the page
-    */
+    /* INVISIBLE DOT LINK — only visible on hover or Ctrl+A */
     .null-link {
       color: var(--bg);
       font-size: 1px;
@@ -325,8 +318,7 @@
       <p>EIDOLON Systems does not comment on the nature of its clients or operational parameters. Persistent inquiry will be forwarded to our legal team.</p>
     </div>
 
-    <!-- LAST POST — CUTS OFF MID-SENTENCE with blinking cursor -->
-    <!-- DATE IS THE KEY: 11 January 2019 = steghide password 11-01-2019 -->
+    <!-- LAST POST CUTS OFF — date is the steghide password: 11-01-2019 -->
     <div class="post final">
       <div class="post-date">11 JANUARY 2019</div>
       <h3>Internal restructuring — Q1 2019</h3>
@@ -341,7 +333,7 @@
       <div class="team-member">
         <div class="team-photo">
           <span class="avatar-letter">M</span>
-          <div class="hidden-pixel"></div><!-- rgb(71,79,84) = GOS -->
+          <div class="hidden-pixel"></div>
         </div>
         <div class="team-name">M. ASHFORD</div>
         <div class="team-role">Chief Executive</div>
@@ -384,24 +376,19 @@
   </footer>
 
   <!--
-    THE INVISIBLE LINK — points to the steganographic image
-    Only visible if you:
-    1. Do Ctrl+A (select all) on the page → you'll see a tiny dot in the footer
-    2. Hover over the bottom-right of the footer and check your browser's status bar
-    3. View page source and find this element
-
-    The image (team_archive.jpg) contains hidden data extractable with:
-      steghide extract -sf team_archive.jpg -p "11-01-2019"
+    INVISIBLE LINK — points to the steganographic image
+    Visible only via: Ctrl+A, hovering bottom of page, or viewing source
+    Extract with: steghide extract -sf team_archive.jpg -p "11-01-2019"
   -->
-  <a href="/assets/team_archive.jpg" class="null-link" aria-hidden="true">·</a>
+  <a href="https://teraformerrrr.github.io/eidolonsystems/assets/team_archive.jpg" class="null-link" aria-hidden="true">·</a>
 
 </div>
 
-<!-- ════ HIDDEN SCRIPT — LAYER 2 CLUES ════ -->
+<!-- ════ HIDDEN SCRIPT ════ -->
 <script>
   // E1D0L0N
   // The password is the day EIDOLON went dark.
-  // Look at the last post. Read the date. Use the format: DD-MM-YYYY
+  // Look at the last post. Read the date. Format: DD-MM-YYYY
   var _archived = true;
   var _timestamp = 1547164800; // Jan 11 2019 00:00:00 UTC
 </script>
